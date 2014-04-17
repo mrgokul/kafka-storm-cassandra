@@ -1,8 +1,12 @@
 import logging
 from random import randint
 from time import sleep
+
+#Set Logger
 logging.basicConfig(format='%(levelname)s: %(asctime)s %(message)s',            
                     filename='example.log',level=logging.WARNING)
+					
+#Log forever
 while True:
     sleep(0.1)
     rand = randint(0,2)
