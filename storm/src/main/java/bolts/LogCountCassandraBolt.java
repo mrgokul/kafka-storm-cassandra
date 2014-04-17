@@ -30,14 +30,14 @@ public class LogCountCassandraBolt extends BaseBasicBolt {
 
 
         /**
-         * First method called
+         * First method called. Connect to Cassandra
          */
         @Override
         public void prepare(Map stormConf, TopologyContext context) {
                 this.counters = new HashMap<String, Integer>();
                 this.currentTime = "";
                 this.first = true;
-                this.dsu = new DatastaxUtil("ec2-54-193-65-48.us-west-1.compute.amazonaws.com", "casstest");
+                this.dsu = new DatastaxUtil("localhost", "test");
         }
 
         /**
@@ -53,7 +53,7 @@ public class LogCountCassandraBolt extends BaseBasicBolt {
         }
 
 		
-		 /**
+         /**
          * Returns a CQL statement 
          */
         public String getStatement(String time, String level, int count){
@@ -65,12 +65,12 @@ public class LogCountCassandraBolt extends BaseBasicBolt {
                 return query;
         }
 
-		/** A hacky but working code for a non-parallel setup. The aim here 
-		* is to demonstrate a simple use of the kafka-storm-cassandra architecture.
-		* Do see the RollingTopWords example from storm-starter project to 
-		* see how moving window computations are performed.	
-		* e.g. Loads into Cassadra ("ERROR","2014-04-16 04:36:29",3)
-		*/		
+        /** A hacky but working code for a non-parallel setup. The aim here 
+        * is to demonstrate a simple use of the kafka-storm-cassandra architecture.
+        * Do see the RollingTopWords example from storm-starter project to 
+        * see how moving window computations are performed.	
+        * e.g. Loads into Cassadra ("ERROR","2014-04-16 04:36:29",3)
+        */		
 		
         @Override
         public void execute(Tuple input, BasicOutputCollector collector) {
