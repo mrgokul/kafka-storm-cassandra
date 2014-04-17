@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Cassandra Monitor</title>
+    <link type="text/css" rel="stylesheet" href="rickshaw/rickshaw.min.css">
+    <script src="rickshaw/vendor/d3.min.js"></script>
+    <script src="rickshaw/vendor/d3.layout.min.js"></script>
+    <script src="rickshaw/rickshaw.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="rickshaw/rickshaw.min.css">
+    
+<style>
+    #chart_container {
+            display: inline-block;
+            font-family: Arial, Helvetica, sans-serif;
+    }
+    #chart {
+            float: left;
+    }
+    #legend {
+            float: left;
+            margin-left: 15px;
+    }
+
+    #y_axis {
+            float: left;
+            width: 40px;
+    }
+</style>
+</head>
+<body>    
+
+
+
+<div id="chart_container">
+        <div id="y_axis"></div>
+        <div id="chart"></div>
+        <div id="legend"></div>
+
+</div>
+
+<script>
+        var seriesData;
+        namesData = ["WARNING","ERROR","CRITICAL"]
+
+        seriesData = [
+                {
+                        name: namesData[0],
+                        data: [  ],
+                        color: "yellow"
+                },
+                {
+                        name: namesData[1],
+                        data: [  ],
+                        color: "orange"
+                },
+                {
+                        name: namesData[2],
+                        data: [ ],
+                        color: "red"
+                },
+
+            ]
+        var graph;		
+
+        graph = new Rickshaw.Graph( {
+                element: document.querySelector("#chart"),
+                width: 900,
+                height: 600,
+                renderer: 'line',
+                series: seriesData
+        } );
+
+        var x_axis = new Rickshaw.Graph.Axis.Time( { graph: graph } );
+
+        var y_axis = new Rickshaw.Graph.Axis.Y( {
+                graph: graph,
+                orientation: 'left',
+                tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+                element: document.getElementById('y_axis'),
+        } );
+
+        var legend = new Rickshaw.Graph.Legend( {
+                element: document.querySelector('#legend'),
+                graph: graph
+        } );
+        graph.render();
+
+        var websocket = new WebSocket("ws://localhost:8080/CassandraWatcher/websocketmain")
+        websocket.onopen = function(message){processOpen(message);};
+        websocket.onmessage =  function(message){processMessage(message);};
+        
+        function processOpen(message){
+        	console.log("Connected");
+        }
+   
+        function processMessage(message){
+             data = JSON.parse(message.data)
+        	 for(key in data){
+        		    index = namesData.indexOf(key)
+        			values = data[key]
+        			for(i=0;i<values.length;i++){
+        			    seriesData[index].data[i] = {x:i,y:values[i]};	
+        			}
+        			
+        		}
+
+        		graph.update()
+         }
+    </script>
+
+    
+</body>
+</html>
