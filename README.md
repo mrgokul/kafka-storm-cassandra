@@ -9,6 +9,6 @@ Kafka
 ------------------
 The setup that worked for me:
 
-> Kafka 0.7.2
-> sbt 2.9.2
-> jdk-6
+* Kafka 0.7.2
+* sbt 2.9.2
+* jdk-6
