@@ -21,7 +21,7 @@ CREATE TABLE logs(time timestamp, log_level varchar, count int, primary key(log_
 ```
 
 ###Storm
-Run the Storm Topology
+Run the Storm Topology.
 ```
 mvn -e clean compile exec:java -Dexec.mainClass=RunTopology
 ```
@@ -33,4 +33,14 @@ python log.py &
 python log2kafka.py -l example.log -t test
 ```
 
+###Visualize
+
+A simple websocket application that continously queries Cassandra on the server side, and renders a time series on the client side.
+
+1. Get [https://github.com/shutterstock/rickshaw](rickshaw) and add it to the WebContent folder
+2. Get Glassfish 4
+3. Add the dependecies of cassandra driver to ext folder inside Glassfish
+4. Start the server
+
+If all goes well, see below:
 
