@@ -22,8 +22,8 @@ CREATE TABLE logs(time timestamp, log_level varchar, count int, primary key(log_
 
 ###Storm
 Run the Storm Topology
-'''
+```
 mvn -e clean compile exec:java -Dexec.mainClass=RunTopology
-'''
+```
 
 
