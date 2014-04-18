@@ -37,7 +37,7 @@ python log2kafka.py -l example.log -t test
 
 A simple websocket application that continously queries Cassandra on the server side, and renders a time series on the client side.
 
-1. Get [https://github.com/shutterstock/rickshaw](rickshaw) and add it to the WebContent folder
+1. Get [rickshaw](https://github.com/shutterstock/rickshaw) and add it to the WebContent folder
 2. Get Glassfish 4
 3. Add the dependecies of cassandra driver to ext folder inside Glassfish
 4. Start the server
