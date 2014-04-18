@@ -26,7 +26,7 @@ Run the Storm Topology
 mvn -e clean compile exec:java -Dexec.mainClass=RunTopology
 ```
 
-###Send to Kafka
+####Send to Kafka
 Tail a continuosly growing log file to Kafka. 
 ```
 python log.py &
