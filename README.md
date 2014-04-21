@@ -42,6 +42,6 @@ A simple websocket application that continously queries Cassandra on the server 
 3. Add the dependecies of cassandra driver to ext folder inside Glassfish
 4. Start the server
 
-If all goes well, see below:
+You can the go [here](http://localhost:8080/CassandraWatcher/default.html) to see below:
 
 ![alt tag](/example.png)
