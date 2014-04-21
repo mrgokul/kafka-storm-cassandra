@@ -44,3 +44,4 @@ A simple websocket application that continously queries Cassandra on the server 
 
 If all goes well, see below:
 
+![My image](https://github.com/mrgokul/kafka-storm-cassandra/blob/master/example.png)
