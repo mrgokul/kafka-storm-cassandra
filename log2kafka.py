@@ -34,6 +34,7 @@ def main():
     if options.topic is None or options.logfile is None:
             parser.print_help()
             sys.exit(1)
+    (options,args) = parser.parse_args()
 
     producer = kafka.producer.Producer(options.topic,options.host,int(options.port))
     try:
